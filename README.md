@@ -61,3 +61,19 @@ Cette erreur se produit lorsque le fichier est introuvable. Ici index.html n'exi
                   return response.end("Erreur server interne: Fichier introuvable");
             }
       }
+
+
+## Question 1.6
+
+- npm install cross-env --save
+  - Ceci installe le paquet "cross-env" dans la section "dependencies" dans "package.json"
+- npm install nodmon --save-dev
+  - Ceci installe le paquet "nodemon" dans la section "devDependencies" dans "package.json"
+
+
+## Question 1.7
+
+- http-dev : Pour le développement, utilise l'outil nodemon
+  - A chaque changement du fichier source, cela redémarre le serveur pour apporter les modifications
+- http-prod : Pour la production, utilise l'outil node
+  - Nécessite un redémarrage manuel si on souhaite apporter les modifications du fichier source

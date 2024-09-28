@@ -23,12 +23,12 @@ function requestListener(_request, response) {
 
 async function requestListener(_request, response) {
   try {
+    console.log("NODE_ENV =", process.env.NODE_ENV);
     const contents = await fs.readFile("index.html", "utf8");
 
     response.setHeader("Content-Type", "text/html");
     response.writeHead(200);
     return response.end(contents);
-
   } catch (error) {
     console.error(error);
     response.setHeader("Content-Type", "text/plain");
