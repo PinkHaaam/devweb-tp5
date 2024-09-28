@@ -21,21 +21,48 @@ function requestListener(_request, response) {
 }
 */
 
-async function requestListener(_request, response) {
+async function requestListener(request, response) {
+  response.setHeader("Content-Type", "text/html");
+  const urlParts = request.url.split("/");
+
   try {
-    console.log("NODE_ENV =", process.env.NODE_ENV);
+
     const contents = await fs.readFile("index.html", "utf8");
 
-    response.setHeader("Content-Type", "text/html");
-    response.writeHead(200);
-    return response.end(contents);
+    switch (urlParts[1]) {
+      case "index.html":
+      case "":
+        response.writeHead(200);
+        return response.end(contents);
+
+      case "random.html":
+        response.writeHead(200);
+        return response.end(`<html><p>${Math.floor(100 * Math.random())}</p></html>`);
+
+      case "random":
+        const nb = parseInt(urlParts[2], 10);
+        if (isNaN(nb) || nb <= 0){
+          response.writeHead(400);
+          return response.end(`<html><p>400: BAD REQUEST</p></html>`);
+        }
+
+        const randomNumbers = Array.from({ length: nb }, () => Math.floor(100 * Math.random()));
+        response.writeHead(200);
+        return response.end(`<html><p>${randomNumbers.join(", ")}</p></html>`);
+
+      default:
+        response.writeHead(404);
+        return response.end(`<html><p>404: NOT FOUND</p></html>`);
+    }
   } catch (error) {
     console.error(error);
-    response.setHeader("Content-Type", "text/plain");
+
     response.writeHead(500);
-    return response.end("Erreur server interne: Fichier introuvable");
+    return response.end(`<html><p>500: INTERNAL SERVER ERROR</p></html>`);
   }
 }
+
+
 
 const server = http.createServer(requestListener);
 server.listen(port, host, () => {

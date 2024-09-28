@@ -1,4 +1,5 @@
 # Réponses au TP5
+Alexandre JAMROZ 
 
 ## Question 1.1
 
@@ -77,3 +78,105 @@ Cette erreur se produit lorsque le fichier est introuvable. Ici index.html n'exi
   - A chaque changement du fichier source, cela redémarre le serveur pour apporter les modifications
 - http-prod : Pour la production, utilise l'outil node
   - Nécessite un redémarrage manuel si on souhaite apporter les modifications du fichier source
+
+
+## Question 1.8
+
+- http://localhost:8000/index.html<br>
+      
+      <html>
+      <head>
+            <title>My Website</title>
+            <style>
+            html {
+                  margin: 0;
+                  padding: 0;
+                  border: 0;
+                  width: 100%;
+                  height: 100%;
+
+            }
+
+            body {
+                  width: 100%;
+                  height: 100%;
+                  position: relative;
+                  background-color: rgb(236, 152, 42);
+                  display: flex;
+                  flex-direction: column;
+                  justify-content: center;
+                  align-items: center;
+            }
+
+            .center {
+                  color: white;
+                  font-family: Helvetica, sans-serif;
+                  text-align: center;
+            }
+
+            h1 {
+                  font-size: 144px;
+            }
+
+            p {
+                  font-size: 64px;
+            }
+                  </style>
+      </head>
+      <body>
+            <div class="center">
+                  <h1>Hello Again!</h1>
+                  <p>This is served from a file</p>
+            </div>
+
+            <iframe frameborder="0" scrolling="no" style="background-color: transparent; border: 0px; display: none;"></iframe>
+
+            <div id="GOOGLE_INPUT_CHEXT_FLAG" style="display: none;" input="" input_stat="{&quot;tlang&quot;:true,&quot;tsbc&quot;:true,&quot;pun&quot;:true,&quot;mk&quot;:true,&quot;ss&quot;:true}">
+            </div>
+      </body>
+      </html>
+
+- http://localhost:8000/random.html
+
+      <html>
+      <head>
+      </head>
+      <body>
+            <p>69</p>
+            <iframe frameborder="0" scrolling="no" style="background-color: transparent; border: 0px; display: none;">
+            </iframe>
+
+            <div id="GOOGLE_INPUT_CHEXT_FLAG" style="display: none;" input="" input_stat="{&quot;tlang&quot;:true,&quot;tsbc&quot;:true,&quot;pun&quot;:true,&quot;mk&quot;:true,&quot;ss&quot;:true}">
+            </div>
+      </body>
+      </html>
+
+- http://localhost:8000/
+
+      <html>
+      <head>
+      </head>
+      <body>
+            <p>404: NOT FOUND</p>
+            <iframe frameborder="0" scrolling="no" style="background-color: transparent; border: 0px; display: none;">
+            </iframe>
+            
+            <div id="GOOGLE_INPUT_CHEXT_FLAG" style="display: none;" input="" input_stat="{&quot;tlang&quot;:true,&quot;tsbc&quot;:true,&quot;pun&quot;:true,&quot;mk&quot;:true,&quot;ss&quot;:true}">
+            </div>
+      </body>
+      </html>
+
+- http://localhost:8000/dont-exist
+
+      <html>
+      <head>
+      </head>
+      <body>
+            <p>404: NOT FOUND</p>
+            <iframe frameborder="0" scrolling="no" style="background-color: transparent; border: 0px; display: none;">
+            </iframe>
+            
+            <div id="GOOGLE_INPUT_CHEXT_FLAG" style="display: none;" input="" input_stat="{&quot;tlang&quot;:true,&quot;tsbc&quot;:true,&quot;pun&quot;:true,&quot;mk&quot;:true,&quot;ss&quot;:true}">
+            </div>
+      </body>
+      </html>
