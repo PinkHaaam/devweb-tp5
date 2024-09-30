@@ -5,15 +5,20 @@ import createError from "http-errors";
 const host = "localhost";
 const port = 8000;
 
+
 const app = express();
+
 
 if (app.get("env") === "development") {
   app.use(morgan("dev"));
 }
 
+
 app.set("view engine", "ejs");
 
+
 app.use(express.static("static"));
+
 
 app.get("/random/:nb", async function (request, response, next) {
   const length = Number.parseInt(request.params.nb, 10);
@@ -29,6 +34,20 @@ app.get("/random/:nb", async function (request, response, next) {
 });
 
 
+app.use((request, response, next) => {
+  console.debug(`default route handler : ${request.url}`);
+  return next(createError(404));
+});
+
+
+app.use((error, _request, response, _next) => {
+  console.debug(`default error handler: ${error}`);
+  const status = error.status ?? 500;
+  const stack = app.get("env") === "development" ? error.stack : "";
+  const result = { code: status, message: error.message, stack };
+  return response.render("error", result);
+});
+
 
 const server = app.listen(port, host);
 server.on("listening", () =>
@@ -36,5 +55,6 @@ server.on("listening", () =>
     `HTTP listening on http://${server.address().address}:${server.address().port} with mode '${process.env.NODE_ENV}'`,
   ),
 );
+
 
 console.info(`File ${import.meta.url} executed.`);

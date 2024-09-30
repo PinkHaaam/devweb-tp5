@@ -157,3 +157,23 @@ Express cherche par défaut un fichier nommé "index.html" et l'affiche si "/" e
    - Comme son nom l'indique, le navigateur utilise la dernière version du serveur non modifiée mise en cache. Cela permet d'accélérer le chargement du contenu.
 - CTRL+Shift+R : 200 "OK"
    - Ici, le navigateur cherche la version la plus récente du serveur et télécharge les nouvelles ressources. Ce processus est un peu plus long que CTRL+R.
+
+
+## Question 2.7
+
+- Pour la production :
+
+```html
+<h1>Error 400</h1>
+<p>Bad Request</p>
+<pre></pre>
+```
+
+
+- Pour le développement :
+
+```html
+<h1>Error 400</h1>
+<p>Bad Request</p>
+<pre>BadRequestEror: Bad Request [...]</pre>
+```
