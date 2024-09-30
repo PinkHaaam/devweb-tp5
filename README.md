@@ -28,41 +28,44 @@ Aucune réponse côté client. La page charge dans le vide.
 
 ## Question 1.4
 
-
-      Error: ENOENT: no such file or directory, open 'e:\Université\S4\DEV WEB\devweb-tp5\index.html'
-                  at async open (node:internal/fs/promises:639:25)
-                  at async Object.readFile (node:internal/fs/promises:1242:14) {
-            errno: -4058,
-            code: 'ENOENT',
-            syscall: 'open',
-            path: 'e:\\Université\\S4\\DEV WEB\\devweb-tp5\\index.html'
-      }
+```bash
+Error: ENOENT: no such file or directory, open 'e:\Université\S4\DEV WEB\devweb-tp5\index.html'
+            at async open (node:internal/fs/promises:639:25)
+            at async Object.readFile (node:internal/fs/promises:1242:14) {
+      errno: -4058,
+      code: 'ENOENT',
+      syscall: 'open',
+      path: 'e:\\Université\\S4\\DEV WEB\\devweb-tp5\\index.html'
+}
+```
 
 Cette erreur se produit lorsque le fichier est introuvable. Ici index.html n'existe pas dans le dossier devweb-tp5.
 <br>Erreur sur node.js :<br>
 
-      ENOENT (No such file or directory): Commonly raised by fs operations to indicate that a component of the specified pathname does not exist. No entity (file or directory) could be found by the given path.
-
+```bash
+ENOENT (No such file or directory): Commonly raised by fs operations to indicate that a component of the specified pathname does not exist. 
+No entity (file or directory) could be found by the given path.
+```
 
 ## Question 1.5
 
+```js
+async function requestListener(_request, response) {
+      try {
+            const contents = await fs.readFile("index.html", "utf8");
 
-      async function requestListener(_request, response) {
-            try {
-                  const contents = await fs.readFile("index.html", "utf8");
+            response.setHeader("Content-Type", "text/html");
+            response.writeHead(200);
+            return response.end(contents);
 
-                  response.setHeader("Content-Type", "text/html");
-                  response.writeHead(200);
-                  return response.end(contents);
-
-            } catch (error) {
-                  console.error(error);
-                  response.setHeader("Content-Type", "text/plain");
-                  response.writeHead(500);
-                  return response.end("Erreur server interne: Fichier introuvable");
-            }
+      } catch (error) {
+            console.error(error);
+            response.setHeader("Content-Type", "text/plain");
+            response.writeHead(500);
+            return response.end("Erreur server interne: Fichier introuvable");
       }
-
+}
+```
 
 ## Question 1.6
 
@@ -82,101 +85,62 @@ Cette erreur se produit lorsque le fichier est introuvable. Ici index.html n'exi
 
 ## Question 1.8
 
-- http://localhost:8000/index.html<br>
-      
-      <html>
-      <head>
-            <title>My Website</title>
-            <style>
-            html {
-                  margin: 0;
-                  padding: 0;
-                  border: 0;
-                  width: 100%;
-                  height: 100%;
+- http://localhost:8000/index.html : 200
 
-            }
+- http://localhost:8000/random.html : 200
 
-            body {
-                  width: 100%;
-                  height: 100%;
-                  position: relative;
-                  background-color: rgb(236, 152, 42);
-                  display: flex;
-                  flex-direction: column;
-                  justify-content: center;
-                  align-items: center;
-            }
+- http://localhost:8000/ : 404
 
-            .center {
-                  color: white;
-                  font-family: Helvetica, sans-serif;
-                  text-align: center;
-            }
+- http://localhost:8000/dont-exist : 404
 
-            h1 {
-                  font-size: 144px;
-            }
 
-            p {
-                  font-size: 64px;
-            }
-                  </style>
-      </head>
-      <body>
-            <div class="center">
-                  <h1>Hello Again!</h1>
-                  <p>This is served from a file</p>
-            </div>
+## Question 2.1
 
-            <iframe frameborder="0" scrolling="no" style="background-color: transparent; border: 0px; display: none;"></iframe>
+- express : http://expressjs.com/
+- https-errors : https://github.com/jshttp/http-errors
+- loglevel : https://github.com/pimterry/loglevel
+- morgan : https://github.com/expressjs/morgan
 
-            <div id="GOOGLE_INPUT_CHEXT_FLAG" style="display: none;" input="" input_stat="{&quot;tlang&quot;:true,&quot;tsbc&quot;:true,&quot;pun&quot;:true,&quot;mk&quot;:true,&quot;ss&quot;:true}">
-            </div>
-      </body>
-      </html>
 
-- http://localhost:8000/random.html
+## Question 2.2
 
-      <html>
-      <head>
-      </head>
-      <body>
-            <p>69</p>
-            <iframe frameborder="0" scrolling="no" style="background-color: transparent; border: 0px; display: none;">
-            </iframe>
+- Les trois routes fonctionnent
+  - http://localhost:8000/ affiche index.html
+  - http://localhost:8000/index.html affiche index.html
+  - http://localhost:8000/random/4 affiche la liste des nombres aléatoires
 
-            <div id="GOOGLE_INPUT_CHEXT_FLAG" style="display: none;" input="" input_stat="{&quot;tlang&quot;:true,&quot;tsbc&quot;:true,&quot;pun&quot;:true,&quot;mk&quot;:true,&quot;ss&quot;:true}">
-            </div>
-      </body>
-      </html>
 
-- http://localhost:8000/
+## Question 2.3
 
-      <html>
-      <head>
-      </head>
-      <body>
-            <p>404: NOT FOUND</p>
-            <iframe frameborder="0" scrolling="no" style="background-color: transparent; border: 0px; display: none;">
-            </iframe>
-            
-            <div id="GOOGLE_INPUT_CHEXT_FLAG" style="display: none;" input="" input_stat="{&quot;tlang&quot;:true,&quot;tsbc&quot;:true,&quot;pun&quot;:true,&quot;mk&quot;:true,&quot;ss&quot;:true}">
-            </div>
-      </body>
-      </html>
+- Pour http://localhost:8000/ et http://localhost:8000/index.html
+  - HTTP/1.1 304 Not Modified
+  - X-Powered-By: Express
+  - Accept-Ranges: bytes
+  - Cache-Control: public, max-age=0
+  - Last-Modified: Wed, 25 Sep 2024 02:26:12 GMT
+  - ETag: W/"380-19227001fb4"
+  - Date: Sat, 28 Sep 2024 12:21:27 GMT
+  - Connection: keep-alive
+  - Keep-Alive: timeout=5
 
-- http://localhost:8000/dont-exist
+- Pour http://localhost:8000/random/4
+  - HTTP/1.1 200 OK
+  - X-Powered-By: Express
+  - Content-Type: text/html; charset=utf-8
+  - Content-Length: 66
+  - ETag: W/"42-3kktwRoZKBKqdkoAQLBqBHlZeFU"
+  - Date: Sat, 28 Sep 2024 12:21:25 GMT
+  - Connection: keep-alive
+  - Keep-Alive: timeout=5
 
-      <html>
-      <head>
-      </head>
-      <body>
-            <p>404: NOT FOUND</p>
-            <iframe frameborder="0" scrolling="no" style="background-color: transparent; border: 0px; display: none;">
-            </iframe>
-            
-            <div id="GOOGLE_INPUT_CHEXT_FLAG" style="display: none;" input="" input_stat="{&quot;tlang&quot;:true,&quot;tsbc&quot;:true,&quot;pun&quot;:true,&quot;mk&quot;:true,&quot;ss&quot;:true}">
-            </div>
-      </body>
-      </html>
+- Donc les nouvelles en-têtes sont :
+  - X-Powered-By
+  - Accept-Ranges
+  - Cache-Control
+  - Last-Modified
+  - Etag
+
+
+## Question 2.4
+
+L'évènement listening se déclenche une fois que le serveur est ouvert, peut accepté les connexions.
