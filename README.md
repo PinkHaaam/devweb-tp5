@@ -144,3 +144,16 @@ async function requestListener(_request, response) {
 ## Question 2.4
 
 L'évènement listening se déclenche une fois que le serveur est ouvert, peut accepté les connexions.
+
+
+## Question 2.5
+
+Express cherche par défaut un fichier nommé "index.html" et l'affiche si "/" est spécifié dans l'adresse.
+
+
+## Question 2.6
+
+- CTRL+R : 304 "Not modified"
+   - Comme son nom l'indique, le navigateur utilise la dernière version du serveur non modifiée mise en cache. Cela permet d'accélérer le chargement du contenu.
+- CTRL+Shift+R : 200 "OK"
+   - Ici, le navigateur cherche la version la plus récente du serveur et télécharge les nouvelles ressources. Ce processus est un peu plus long que CTRL+R.
